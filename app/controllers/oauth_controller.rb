@@ -20,6 +20,7 @@ class OauthController < ApplicationController
     })
     redirect_to("http://localhost:3001/token/#{res.parsed_response["access_token"]}")
   end
+  #check commit diff
 
   def create_token
     if !Oauth.find_by(user_id: params[:id])
