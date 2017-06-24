@@ -20,8 +20,6 @@ class EventsController < ApplicationController
 
   def show
     event = find_event
-    # TODO: create a serializer so response includes the
-    #  JSON representation of associated playlist
     render json: event
   end
 
@@ -32,9 +30,11 @@ class EventsController < ApplicationController
   end
 
   def find_event_by_invite
-    event = Event.find_by(invite_code: params[:id])
+    guest = create_guest
+    guest.save
+    event = Event.find_by(invite_code: params[:inviteCode])
     if event
-      render json: {eventId: event.id}
+      render json: {eventId: event.id, user: guest}
     end
   end
 
@@ -50,6 +50,15 @@ class EventsController < ApplicationController
 
   def find_user
     User.find(params[:user_id])
+  end
+
+  def create_guest
+    user = User.new
+    user.username = params[:username]
+    user.name = params[:username]
+    user.password = 'null'
+    user.guest = true
+    user
   end
 
   # TODO: add strong params

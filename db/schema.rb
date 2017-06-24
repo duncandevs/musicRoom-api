@@ -10,11 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170614002213) do
+ActiveRecord::Schema.define(version: 20170622093057) do
+
+  create_table "albums", force: :cascade do |t|
+    t.string "name"
+    t.string "uri"
+    t.string "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "attendances", force: :cascade do |t|
     t.integer "event_id"
     t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "chatmsgs", force: :cascade do |t|
+    t.integer "event_id"
+    t.integer "user_id"
+    t.string "message"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -49,6 +65,18 @@ ActiveRecord::Schema.define(version: 20170614002213) do
     t.integer "code"
   end
 
+  create_table "tracks", force: :cascade do |t|
+    t.string "name"
+    t.string "artist"
+    t.string "cover"
+    t.string "uri"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "album_id"
+    t.integer "event_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "name"
@@ -56,6 +84,15 @@ ActiveRecord::Schema.define(version: 20170614002213) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "profileId"
+    t.boolean "guest"
+  end
+
+  create_table "votes", force: :cascade do |t|
+    t.integer "track_id"
+    t.integer "user_id"
+    t.boolean "vote"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

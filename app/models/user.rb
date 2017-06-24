@@ -4,6 +4,8 @@ class User < ApplicationRecord
   has_many :attendances
   has_many :events , through: :attendances
   has_many :playlists
+  has_many :votes
+  has_many :chatmsgs
 
   validates :name, presence: true
   validates :username, presence: true , uniqueness: true
