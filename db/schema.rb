@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170622093057) do
+ActiveRecord::Schema.define(version: 20170703145553) do
 
   create_table "albums", force: :cascade do |t|
     t.string "name"
@@ -31,6 +31,13 @@ ActiveRecord::Schema.define(version: 20170622093057) do
     t.integer "event_id"
     t.integer "user_id"
     t.string "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "devices", force: :cascade do |t|
+    t.string "deviceId"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -63,6 +70,13 @@ ActiveRecord::Schema.define(version: 20170622093057) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "code"
+  end
+
+  create_table "spotifies", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "spotifyUserId"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tracks", force: :cascade do |t|

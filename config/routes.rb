@@ -3,11 +3,12 @@ Rails.application.routes.draw do
     resources :events do
       resources :chatmsgs
     end
+    resources :devices
+    resources :spotifys
   end
 
   resources :playlists
   resources :tracks
-
 
   get '/' , to: 'oauth#index'
   post '/users' , to: 'users#create'
@@ -22,4 +23,5 @@ Rails.application.routes.draw do
   post '/tracks/:id/unvote', to: 'tracks#unvote'
   get '/events/:id/chatmsgs', to: 'chatmsgs#index'
   post '/tracks/event' , to: 'tracks#event'
+  get '/refresh' , to: 'oauth#refresh'
 end
