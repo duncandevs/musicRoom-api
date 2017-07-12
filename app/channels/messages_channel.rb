@@ -4,12 +4,12 @@ class MessagesChannel < ApplicationCable::Channel
     stream_from 'messages'
   end
 
-  def receive
-    message = Chatmsg.new(content: payload['content'])
+  def receive(payload)
+    message = Chatmsg.new(message: payload['content'])
     # message.user = User.first
     # message.chatroom = Chatroom.first
     # message.save
-    ActionCable.server.broadcast('messages', MessageSerializer.new(message))
+    ActionCable.server.broadcast('messages', message)
   end
 
   def unsubscribed
