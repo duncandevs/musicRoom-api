@@ -5,16 +5,12 @@ class OauthController < ApplicationController
   def refresh
     # event_id = Event.find_by(params[:event_id]).host_id
     # user_id = User.find_by(event_id:event_id).id
-    oldToken = "BQCY0ruJTIinv5Cx60twRUELplyEWsOxpNc2On5fmawxLijTrYek3OlqXSjGO_DhgXNjbUBYgDZfxv6Yq8HnShb1Hcg2kvxSMJDhyq72IyYmlYj1xcRPZqzSGgD5-oBulVUSyupYqwOeiEzWl7LA7bTkCEMtTkeq7g9jN70MshgFTnDziCjIptsXUnxCTxtIQDmhDPP7MqftPQQgkK7UkPvgCiFkJH5JvI9y4XRVJlcJoQHiHwyFEkDaiuzWc5MAlLyY2wfYmOcCEqaKdfiX2WsPQ9iE"
-    key = Base64.encode64('d2a6a11d756a4c4da594170cd80f425e:4fe90b825c294147be96f6181e4cc8bb')
-    res = HTTParty.post('https://accounts.spotify.com/api/token',{
-        body:{
-          grant_type: "refresh_token",
-          refresh_token: oldToken,
-        },
-        headers:{
-          Authorization: "Basic " + key
-        }
+    oldToken = 'BQB60j3w0BbW-LSCbs6f4G9IMLSVNf2tyeX3qDsvkIBaXZxeAw1mPKWeXuYvqkxE8RiA8akfM6sPikgGaq_b4bGjFLWaK7XPkeLiRrAD-bxg4CoCeN8j_RZtYwNu8Vz8H1ThDBDE5EPOuFOUWu2TL-fCeGVw7n12kvxpU9Qu6cTxHR_1V_2sGfyqI2UXaSDH9JISRGQ0M2dLj5fBv_7Z5Dgvm_0vtp6XO4zmn4YxZvAWVmPnhGtRfG2bdU3IC7wdIpAspNFqwLwov4m2K36Xd1Cql4Is'
+    res = HTTParty.post("https://accounts.spotify.com/api/token",:body =>{
+        grant_type: 'refresh_token',
+        refresh_token: oldToken,
+        client_secret: '4fe90b825c294147be96f6181e4cc8bb',
+        client_id: 'd2a6a11d756a4c4da594170cd80f425e'
     })
     render json: res
   end

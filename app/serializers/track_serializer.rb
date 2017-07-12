@@ -4,6 +4,6 @@ class TrackSerializer < ActiveModel::Serializer
   has_many :votes
 
   def voteCount
-    object.votes.count
+    object.votes.where(vote:true).count
   end
 end
